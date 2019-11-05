@@ -16,11 +16,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td scope="col">1</td>
-                    <td scope="col">게시글의 제목이 노출됩니다.[2]</td>
-                    <td scope="col">홍길동</td>
-                    <td scope="col">2018-01-01 09:00</td>
+                <tr v-for="post in posts" :key="post.id">
+                    <td scope="col">{{ post.id }}</td>
+                    <td scope="col">
+                        <router-link :to="{ name: 'PostListPage' }"> {{ post.title }}</router-link>
+                        [{{ post.comments.length }}]
+                    </td>
+                    <td scope="col">{{ post.user.name }}</td>
+                    <td scope="col">{{ post.createdAt }}</td> 
                 </tr>
             </tbody>
         </table>
@@ -29,6 +32,11 @@
 
 <script>
 export default {
-    name: 'PostList'
+    name: 'PostList',
+    props: {
+        posts: {
+            type: Array
+        }
+    }
 }
 </script>
