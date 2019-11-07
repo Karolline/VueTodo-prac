@@ -1,22 +1,20 @@
 <template>
     <div class="post-view-page">
-        <div class="post-view">
-            <div>
-                <h1>{{ post.title }}</h1>
-                <span>{{ post.id }}</span>
-                <strong>{{ post.user.name }} . {{ post.createdAt }}</strong>
-            </div>
-            <p>{{ post.contents }}</p>
-        </div>
+        <post-view v-if="post" :post = "post"/>
+        <p v-else>게시글 불러오는 중.. </p>
         <router-link :to="{ name: 'PostListPage' }">목록</router-link>
     </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import PostView from '../components/PostView';
 
 export default {
     name: 'PostViewPage',
+    components: {
+        PostView
+    },
     props: {
         postId: {
             type: String,
