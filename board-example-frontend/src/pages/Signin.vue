@@ -20,10 +20,14 @@ export default {
             const { email, password } = payload
             api.post('/auth/signin', { email, password })
             .then(res => {
-                console.log(res.data)
+                const { accessToken } = res.data
+                api.defaults.headers.common.Authorization = `Bearer ${accessToken}`
+                alert('로그인이 완료되었습니다.')
+                this.$router.push({ name: 'PostListPage'} )
             })
             .catch(err => {
-                alert('로그인 정보가 잘못되었습니다.')
+                // console.log(err)
+                alert(err.response.data.msg)
             })
         }
     }
