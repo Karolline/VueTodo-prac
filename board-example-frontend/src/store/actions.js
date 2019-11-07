@@ -1,5 +1,5 @@
 import api from '@/api'
-import { FETCH_POST_LIST, FETCH_POST, SET_ACCESS_TOKEN } from './mutation-types'
+import { FETCH_POST_LIST, FETCH_POST, SET_ACCESS_TOKEN, SET_MY_INFO } from './mutation-types'
 
 export default {
     fetchPostList ({ commit }) {
@@ -20,6 +20,9 @@ export default {
         .then(res => {
             const {accessToken} = res.data
             commit(SET_ACCESS_TOKEN, accessToken)
+            return api.get('/users/me') // 헤더에 token이 저장되었으므로 사용자 정보 로드 가능
+        }).then(res => {
+            commit(SET_MY_INFO, res.data)
         })
     }
 }

@@ -1,4 +1,4 @@
-import { FETCH_POST_LIST, FETCH_POST, SET_ACCESS_TOKEN } from './mutation-types'
+import { FETCH_POST_LIST, FETCH_POST, SET_ACCESS_TOKEN, SET_MY_INFO } from './mutation-types'
 import api from '@/api'
 
 export default {
@@ -12,6 +12,11 @@ export default {
         if(accessToken) {
             state.accessToken = accessToken
             api.defaults.headers.common.Authorization = `Bearer ${accessToken}`
+        }
+    },
+    [SET_MY_INFO] (state, me) {
+        if (me) {
+            state.me = me
         }
     }
 }
