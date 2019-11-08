@@ -7,6 +7,7 @@ import Signin from '../pages/Signin'
 import AppHeader from '../components/AppHeader'
 import PostCreatePage from '../pages/PostCreatePage'
 import store from '@/store'
+import PostEditPage from '../pages/PostEditPage'
 
 Vue.use(Router)
 
@@ -35,6 +36,17 @@ export default new Router({
           next({ name: 'Signin' })
         }
         next()
+      }
+    },
+    {
+      path: '/post/:postId/edit',
+      name: 'PostEditPage',
+      components: {
+        header: AppHeader,
+        default: PostEditPage
+      },
+      props: {
+        default: true
       }
     },
     {
